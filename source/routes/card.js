@@ -13,5 +13,6 @@ router.route('/:id')
   .put(isAuthenticated, CardController.updateCardById)
   .delete(isAuthenticated, CardController.removeCardById);
 
+router.get('/column/:columnId', isAuthenticated, CardController.getCardsByColumnId);
 
 module.exports = router;

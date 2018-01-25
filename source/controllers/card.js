@@ -9,7 +9,10 @@ function getCards(req, res) {
 
 function createCard(req, res) {
   Card.create({
-    name: req.body.name
+    text: req.body.text,
+    description: req.body.description,
+    color: req.body.color,
+    columnId: req.body.columnId
   }, (error, card) => {
     if (error) return res.status(500).send(`There was a problem adding the information to the database.`);
     res.status(200).send(card);
@@ -38,10 +41,20 @@ function updateCardById(req, res) {
   });
 }
 
+function getCardsByColumnId(req, res) {
+  Card.find({
+    columnId: req.params.columnId
+  }, (error, cards) => {
+    if (error) return res.status(500).send(`There was a problem finding the columns.`);
+    res.status(200).send(cards);
+  });
+}
+
 module.exports = {
   getCards: getCards,
   createCard: createCard,
   getCardById: getCardById,
   updateCardById: updateCardById,
-  removeCardById: removeCardById
+  removeCardById: removeCardById,
+  getCardsByColumnId: getCardsByColumnId
 };

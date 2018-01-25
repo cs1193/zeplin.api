@@ -8,14 +8,14 @@ function authenticateUser(req, res) {
     if (error) throw error;
 
     if (!user) {
-      res.json({
-        success: false,
+      res.status(401).json({
+        status: 'failed',
         message: 'Authentication Failed. User not found'
       });
     } else if (user) {
       if (user.password != req.body.password) {
-        res.json({
-          success: false,
+        res.status(401).json({
+          status: 'failed',
           message: 'Authentication Failed. Wrong Password.'
         });
       } else {
@@ -27,10 +27,13 @@ function authenticateUser(req, res) {
           expiresIn: 1440
         });
 
+        var date = new Date();
+
         res.json({
-          success: true,
+          status: 'success',
           message: 'User Authenticated',
-          token: token
+          token: token,
+          tokenExpiration: new Date(date.getTime() + 1440 * 60000)
         })
       }
     }

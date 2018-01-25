@@ -13,5 +13,7 @@ router.route('/:id')
   .put(isAuthenticated, ColumnController.updateColumnById)
   .delete(isAuthenticated, ColumnController.removeColumnById);
 
+router.get('/board/:boardId', isAuthenticated, ColumnController.getColumnsByBoardId);
+
 
 module.exports = router;

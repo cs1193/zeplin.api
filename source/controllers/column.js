@@ -9,7 +9,9 @@ function getColumns(req, res) {
 
 function createColumn(req, res) {
   Column.create({
-    name: req.body.name
+    name: req.body.columnData.name,
+    color: req.body.columnData.color,
+    boardId: req.body.boardId,
   }, (error, column) => {
     if (error) return res.status(500).send(`There was a problem adding the information to the database.`);
     res.status(200).send(column);
@@ -38,10 +40,20 @@ function updateColumnById(req, res) {
   });
 }
 
+function getColumnsByBoardId(req, res) {
+  Column.find({
+    boardId: req.params.boardId
+  }, (error, columns) => {
+    if (error) return res.status(500).send(`There was a problem finding the columns.`);
+    res.status(200).send(columns);
+  })
+}
+
 module.exports = {
   getColumns: getColumns,
   createColumn: createColumn,
   getColumnById: getColumnById,
   updateColumnById: updateColumnById,
-  removeColumnById: removeColumnById
+  removeColumnById: removeColumnById,
+  getColumnsByBoardId: getColumnsByBoardId
 };

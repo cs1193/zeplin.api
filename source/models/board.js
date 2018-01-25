@@ -10,7 +10,7 @@ const BoardSchema = new mongoose.Schema({
     type: Number
   },
   columns: {
-    type: Object
+    type: Array
   }
 }, {timestamps: true});
 

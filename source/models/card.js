@@ -6,22 +6,26 @@ const CardSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  description: {
+    type: String,
+    required: true
+  },
   color: {
     type: String
   },
   image: {
     type: String
   },
-  commentCount: {
+  comment: {
     type: Number
   },
-  completedTask: {
+  taskCompleted: {
     type: Number
   },
-  totalTask: {
+  taskTotal: {
     type: Number
   },
-  sharedProfile: {
+  shared: {
     type: Object
   },
   remainder: {

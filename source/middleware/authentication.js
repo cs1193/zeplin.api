@@ -13,7 +13,7 @@ function isAuthenticated (req, res, next) {
   } else {
     jsonwebtoken.verify(token, (process.env.SECRET_KEY || 'zeplin.api'), (error, decoded) => {
       if (error) {
-        return res.json({
+        return res.send(401).json({
           success: false,
           message: 'Failed to authenticate token.'
         });
